@@ -1,0 +1,25 @@
+<mat-card [routerLink]="['/product',product.id]" class="card" appearance="outlined">
+  <mat-card-header>
+    <div mat-card-avatar class="header-image"></div>
+    <mat-card-title>{{product.title}}</mat-card-title>
+    <mat-card-subtitle><span>Category:</span> {{product.category}}</mat-card-subtitle>
+  </mat-card-header>
+  <div class="image-cont">
+    <img mat-card-image class="main-img" src="{{product.image}}" alt="Photo">
+  </div>
+  <mat-card-content>
+    <p class="description">
+      {{product.description}}
+    </p>
+    <div class="additional-data">
+      <span>Price <b>{{ product.price}}$</b></span>
+      <span>rating <b>{{product.rating.rate}}</b></span>
+    </div>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-raised-button>Add To Cart <mat-icon>
+        add_shopping_cart
+      </mat-icon></button>
+  </mat-card-actions>
+  <span class="cat-num">Catalog Number: {{product.id}}</span>
+</mat-card>

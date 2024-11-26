@@ -1,0 +1,24 @@
+<div class="product-container">
+    <!-- Product Image -->
+    <div class="product-image">
+      <img [src]="product.image" [alt]="product.title" />
+    </div>
+  
+    <!-- Product Details -->
+    <div class="product-details">
+      <h1>{{ product.title }}</h1>
+      <p class="category">Category: {{ product.category }}</p>
+      <p class="description">{{ product.description }}</p>
+      <p class="price">Price: ${{ product.price}}</p>
+  
+      <!-- Product Rating -->
+      <div class="rating">
+        <p>Rating: {{ product.rating.rate }} / 5</p>
+        <p>({{ product.rating.count }} reviews)</p>
+      </div>
+  
+      <!-- Add to Cart Button -->
+      <button class="add-to-cart-btn">Add to Cart</button>
+    </div>
+  </div>
+  

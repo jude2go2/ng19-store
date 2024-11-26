@@ -1,0 +1,27 @@
+<mat-toolbar>
+    <button mat-icon-button class="icon" [matMenuTriggerFor]="menu">
+        <mat-icon>menu</mat-icon>
+        <mat-menu #menu="matMenu">
+            <a mat-menu-item [routerLink]="['']">
+                <mat-icon>home</mat-icon>
+                <span>Home</span>
+            </a>
+            <a mat-menu-item [routerLink]="['about']">
+                <mat-icon>
+                    info
+                </mat-icon>
+                <span>About</span>
+            </a>
+        </mat-menu>
+    </button>
+    <span class="title" [routerLink]="['']">My Store</span>
+    <span class="spacer"></span>
+    <button mat-icon-button class="favorite-icon">
+        <mat-icon>paid</mat-icon>
+    </button>
+    <button mat-icon-button>
+        <mat-icon>
+            shopping_cart
+        </mat-icon>
+    </button>
+</mat-toolbar>

@@ -1,0 +1,11 @@
+.products-container{
+    display: flex;
+    gap:10px;
+    padding: 10px;
+    flex-wrap: wrap;
+}
+.filters{
+position: sticky;
+top: 64px;
+z-index: 10;
+}

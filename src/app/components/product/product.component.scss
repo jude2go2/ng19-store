@@ -1,0 +1,54 @@
+.card {
+  max-width: 300px;
+  height: 500px;
+  box-shadow: 0px 0px 5px black;
+  cursor: pointer;
+  gap:10px;
+  transition:0.1s
+}
+.card:hover {
+scale: 1.01;
+}
+
+.header-image {
+  background-image: url("https://material.angular.io/assets/img/examples/shiba1.jpg");
+  background-size: cover;
+}
+.image-cont {
+  display: flex;
+  justify-content: center;
+  .main-img {
+    height: 140px;
+    width: 120px;
+  }
+}
+.cat-num{
+  position: absolute;
+  bottom: 10px;
+  right: 5px;
+  font-size: 12px;
+}
+.description {
+  max-height: 150px;
+  overflow: auto;
+  font-size: 14px;
+}
+mat-card-title {
+  font-size: 15px;
+  height: 40px;
+  overflow: auto;
+}
+mat-card-subtitle {
+  font-size: 12px;
+  span{
+    font-size: 13px;
+  }
+}
+mat-card-actions{
+  margin-top: auto;
+}
+.additional-data {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}

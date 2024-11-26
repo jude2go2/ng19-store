@@ -1,0 +1,15 @@
+<div class="filters">
+    <mat-form-field>
+        <mat-label>Categories</mat-label>
+        <mat-select [value]="categoriesList" [formControl]="activeCategories" multiple>
+            @for (categorie of categoriesList; track categorie) {
+            <mat-option  [value]="categorie">{{categorie | titlecase}}</mat-option>
+            }
+        </mat-select>
+    </mat-form-field>
+</div>
+<div class="products-container">
+    <ng-container *ngFor="let product of products">
+        <app-product *ngIf="activeCategories.value.includes(product.category)" [product]="product"></app-product>
+    </ng-container>
+</div>
