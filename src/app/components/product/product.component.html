@@ -1,5 +1,5 @@
-<mat-card [routerLink]="['/product',product.id]" class="card" appearance="outlined">
-  <mat-card-header>
+<mat-card class="card" appearance="outlined">
+  <mat-card-header class="header" [routerLink]="['/product',product.id]">
     <div mat-card-avatar class="header-image"></div>
     <mat-card-title>{{product.title}}</mat-card-title>
     <mat-card-subtitle><span>Category:</span> {{product.category}}</mat-card-subtitle>
@@ -13,7 +13,13 @@
     </p>
     <div class="additional-data">
       <span>Price <b>{{ product.price}}$</b></span>
-      <span>rating <b>{{product.rating.rate}}</b></span>
+      <div class="centered-flex">
+        <span>rating <b>{{product.rating.rate}}</b> </span>
+        <mat-icon class="star"
+        [style.color]="product.rating.rate < 2 ? 'red' : product.rating.rate < 3 ? 'orange' : 'rgb(255, 217, 0)'"
+        >star<mat-icon
+            class="star-shadow">star</mat-icon></mat-icon>
+      </div>
     </div>
   </mat-card-content>
   <mat-card-actions>
@@ -21,5 +27,6 @@
         add_shopping_cart
       </mat-icon></button>
   </mat-card-actions>
-  <span class="cat-num">Catalog Number: {{product.id}}</span>
+  <mat-icon class="info-icon" [routerLink]="['/product',product.id]">info</mat-icon>
+  <i class="cat-num">Catalog Number: {{product.id}}</i>
 </mat-card>
