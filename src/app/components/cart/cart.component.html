@@ -1,0 +1,10 @@
+<p>cart works!</p>
+
+<mat-card appearance="outlined" *ngFor="let item of cartProducts">
+  <mat-card-content
+    >{{ item.title }} | {{ item.price | currency : "USD" }}
+    <button (click)="removeFromCart(item)">X</button>
+  </mat-card-content>
+</mat-card>
+<h2>Total: {{ totalPrice | currency : "USD" }}</h2>
+<pre></pre>
