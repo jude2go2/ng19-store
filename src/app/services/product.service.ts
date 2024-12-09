@@ -34,7 +34,6 @@ export class ProductService {
           const newProducts: Array<IProduct> = this.storageService.getLocal(
             StorageItems.NewProducts
           );
-          debugger;
           const allProducts: Array<IProduct> = [...data, ...newProducts];
 
           return allProducts;
@@ -93,13 +92,37 @@ export class ProductService {
       ...newProducts,
     ];
 
-    product.id = allProducts.length;
+    product.id = allProducts.length + 1;
     const justNewProducts: Array<IProduct> = [
       ...newProducts,
       product as IProduct,
     ];
     allProducts.push(product as IProduct);
     this.storageService.setLocal(StorageItems.NewProducts, justNewProducts);
+
     this.fetchProducts();
+  }
+
+  editProduct(product: IProduct): void {
+    const allProducts: Array<IProduct> = this.products$.value;
+
+    const idx = allProducts.findIndex((item) => {
+      return item.id === product.id;
+    });
+
+    if (idx !== -1) {
+      allProducts[idx] = product;
+    }
+    debugger;
+    this.products$.next(allProducts);
+  }
+
+  productForEdit: IProduct;
+
+  setProductForEdit(product: IProduct): void {
+    this.productForEdit = product;
+  }
+  getProductForEdit(): IProduct {
+    return this.productForEdit;
   }
 }

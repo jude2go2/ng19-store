@@ -23,6 +23,15 @@
   >
     <mat-icon>logout</mat-icon>
   </button>
+  <button
+    mat-icon-button
+    class="favorite-icon"
+    [routerLink]="['dashboard']"
+    *ngIf="this.isAuthenticated$ | async"
+    matTooltip="Dashboard"
+  >
+    <mat-icon>admin_panel_settings</mat-icon>
+  </button>
 
   <button
     mat-icon-button

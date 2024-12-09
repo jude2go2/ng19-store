@@ -35,7 +35,19 @@
   box-shadow: 5px 5px 10px rgb(182, 182, 182);
 
   cursor: pointer;
-  
+}
+.pencil-icon {
+  position: absolute;
+  top: 40px;
+  right: 5px;
+  font-size: 22px;
+  color: #005cbb;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  box-shadow: 5px 5px 10px rgb(182, 182, 182);
+
+  cursor: pointer;
 }
 .info-icon:hover {
   scale: 1.1;
@@ -91,7 +103,7 @@ mat-card-content {
     position: absolute;
     top: 3px;
     right: -3px;
-    transform:scale(1.1);
+    transform: scale(1.1);
     color: rgba(43, 42, 42, 0.37);
     z-index: -1;
   }

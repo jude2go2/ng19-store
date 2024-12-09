@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ProductFormComponent } from '../product-form/product-form.component';
+import { MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-dashboard',

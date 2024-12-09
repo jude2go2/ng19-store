@@ -4,7 +4,7 @@ import { AboutComponent } from './components/about/about.component';
 import { ProductPageComponent } from './components/product-page/product-page.component';
 import { CartComponent } from './components/cart/cart.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
-import { AuthGuard } from './guards/auth.guard';
+import { AuthGuard } from './4/auth.guard';
 
 export const routes: Routes = [
   {
