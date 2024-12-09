@@ -7,6 +7,8 @@ import { RouterModule } from '@angular/router';
 import { ProductService } from '../../services/product.service';
 import { map, Observable } from 'rxjs';
 import { CommonModule } from '@angular/common';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { LoginComponent } from '../login/login.component';
 @Component({
   selector: 'app-header',
   standalone: true,
@@ -17,6 +19,7 @@ import { CommonModule } from '@angular/common';
     MatIconModule,
     MatIconButton,
     RouterModule,
+    MatDialogModule,
   ],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
@@ -24,7 +27,10 @@ import { CommonModule } from '@angular/common';
 export class HeaderComponent {
   cartTotalItems$: Observable<number>;
 
-  constructor(private productService: ProductService) {}
+  constructor(
+    private productService: ProductService,
+    private dialog: MatDialog
+  ) {}
 
   ngOnInit() {
     this.cartTotalItems$ = this.productService.getCartProducts().pipe(
@@ -32,5 +38,13 @@ export class HeaderComponent {
         return data.length;
       })
     );
+  }
+
+  openLogin(): void {
+    const dialogRef = this.dialog.open(LoginComponent, {});
+
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log('The dialog was closed');
+    });
   }
 }

@@ -14,17 +14,24 @@ export class ProductService {
   ) {}
 
   products: IProduct[] = [];
+  private products$: BehaviorSubject<IProduct[]> = new BehaviorSubject([]);
 
   private cartProductsSubject$: BehaviorSubject<IProduct[]> =
     new BehaviorSubject([]);
 
   public getProducts(): Observable<IProduct[]> {
-    return this.http.get<IProduct[]>('https://fakestoreapi.com/products').pipe(
-      tap((data) => {
-        this.products = data;
-      })
-    );
+    this.fetchProducts();
+    return this.products$.asObservable();
   }
+
+  private fetchProducts(): void {
+    this.http
+      .get<IProduct[]>('https://fakestoreapi.com/products')
+      .subscribe((data) => {
+        this.products$.next(data);
+      });
+  }
+
   public getProductById(id: string): Observable<IProduct> {
     console.log('serviceID ', id);
     return this.http.get<IProduct>(`https://fakestoreapi.com/products/${id}`);
