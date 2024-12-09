@@ -43,6 +43,7 @@ export class LoginComponent {
 
   onSubmit() {
     console.log('Form Data:', this.userForm.value);
+
     this.authService.login(
       this.userForm.value.email,
       this.userForm.value.password

@@ -9,6 +9,7 @@ import { map, Observable } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { LoginComponent } from '../login/login.component';
+import { AuthService } from '../../services/auth.service';
 @Component({
   selector: 'app-header',
   standalone: true,
@@ -27,12 +28,16 @@ import { LoginComponent } from '../login/login.component';
 export class HeaderComponent {
   cartTotalItems$: Observable<number>;
 
+  isAuthenticated$: Observable<boolean>;
+
   constructor(
     private productService: ProductService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private authService: AuthService
   ) {}
 
   ngOnInit() {
+    this.isAuthenticated$ = this.authService.isAuthenticated$();
     this.cartTotalItems$ = this.productService.getCartProducts().pipe(
       map((data) => {
         return data.length;
@@ -46,5 +51,9 @@ export class HeaderComponent {
     dialogRef.afterClosed().subscribe((result) => {
       console.log('The dialog was closed');
     });
+  }
+
+  logout(): void {
+    this.authService.logout();
   }
 }

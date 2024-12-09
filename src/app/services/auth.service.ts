@@ -1,17 +1,18 @@
 import { Injectable } from '@angular/core';
 import { StorageService } from './storage.service';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  constructor(private storageService: StorageService) {}
+  constructor(private storageService: StorageService, private router: Router) {}
 
-  private isLoggedIn$: BehaviorSubject<boolean> = new BehaviorSubject(false);
+  public isLoggedIn$: BehaviorSubject<boolean> = new BehaviorSubject(false);
 
   login(email: string, password: string) {
-    debugger;
+    //Check with DB if is correct
     this.isLoggedIn$.next(true);
     this.storageService.setLocal('authToken', 'sample-token');
   }
@@ -19,6 +20,7 @@ export class AuthService {
   logout() {
     this.isLoggedIn$.next(false);
     this.storageService.removeLocal('authToken');
+    this.router.navigate(['']);
   }
 
   isAuthenticated$(): Observable<boolean> {

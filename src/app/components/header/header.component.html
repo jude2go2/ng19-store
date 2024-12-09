@@ -14,7 +14,21 @@
   </button>
   <span class="title" [routerLink]="['']">My Store</span>
   <span class="spacer"></span>
-  <button mat-icon-button class="favorite-icon" (click)="openLogin()">
+  <button
+    mat-icon-button
+    class="favorite-icon"
+    (click)="logout()"
+    *ngIf="this.isAuthenticated$ | async"
+  >
+    <mat-icon>logout</mat-icon>
+  </button>
+
+  <button
+    mat-icon-button
+    class="favorite-icon"
+    (click)="openLogin()"
+    *ngIf="!(this.isAuthenticated$ | async)"
+  >
     <mat-icon>login</mat-icon>
   </button>
   <button mat-icon-button class="favorite-icon">
