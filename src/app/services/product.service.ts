@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, tap } from 'rxjs';
+import { BehaviorSubject, map, Observable, tap } from 'rxjs';
 import { IProduct, StorageItems } from '../models';
 import { StorageService } from './storage.service';
 
@@ -11,7 +11,9 @@ export class ProductService {
   constructor(
     private http: HttpClient,
     private storageService: StorageService
-  ) {}
+  ) {
+    this.fetchProducts();
+  }
 
   products: IProduct[] = [];
   private products$: BehaviorSubject<IProduct[]> = new BehaviorSubject([]);
@@ -27,6 +29,17 @@ export class ProductService {
   private fetchProducts(): void {
     this.http
       .get<IProduct[]>('https://fakestoreapi.com/products')
+      .pipe(
+        map((data) => {
+          const newProducts: Array<IProduct> = this.storageService.getLocal(
+            StorageItems.NewProducts
+          );
+          debugger;
+          const allProducts: Array<IProduct> = [...data, ...newProducts];
+
+          return allProducts;
+        })
+      )
       .subscribe((data) => {
         this.products$.next(data);
       });
@@ -69,5 +82,24 @@ export class ProductService {
     }
 
     return this.cartProductsSubject$.asObservable();
+  }
+
+  addProduct(product: Partial<IProduct>): void {
+    const newProducts: Array<IProduct> = this.storageService.getLocal(
+      StorageItems.NewProducts
+    );
+    const allProducts: Array<IProduct> = [
+      ...this.products$.value,
+      ...newProducts,
+    ];
+
+    product.id = allProducts.length;
+    const justNewProducts: Array<IProduct> = [
+      ...newProducts,
+      product as IProduct,
+    ];
+    allProducts.push(product as IProduct);
+    this.storageService.setLocal(StorageItems.NewProducts, justNewProducts);
+    this.fetchProducts();
   }
 }
