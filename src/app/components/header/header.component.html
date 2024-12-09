@@ -19,6 +19,7 @@
     class="favorite-icon"
     (click)="logout()"
     *ngIf="this.isAuthenticated$ | async"
+    matTooltip="Logout"
   >
     <mat-icon>logout</mat-icon>
   </button>
@@ -27,7 +28,8 @@
     mat-icon-button
     class="favorite-icon"
     (click)="openLogin()"
-    *ngIf="!(this.isAuthenticated$ | async)"
+    *ngIf="!(isAuthenticated$ | async)"
+    matTooltip="Login as Admin"
   >
     <mat-icon>login</mat-icon>
   </button>

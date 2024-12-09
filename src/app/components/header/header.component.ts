@@ -10,6 +10,7 @@ import { CommonModule } from '@angular/common';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { LoginComponent } from '../login/login.component';
 import { AuthService } from '../../services/auth.service';
+import { MatTooltipModule } from '@angular/material/tooltip';
 @Component({
   selector: 'app-header',
   standalone: true,
@@ -21,6 +22,7 @@ import { AuthService } from '../../services/auth.service';
     MatIconButton,
     RouterModule,
     MatDialogModule,
+    MatTooltipModule,
   ],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
@@ -34,10 +36,11 @@ export class HeaderComponent {
     private productService: ProductService,
     private dialog: MatDialog,
     private authService: AuthService
-  ) {}
+  ) {
+    this.isAuthenticated$ = this.authService.isAuthenticated$();
+  }
 
   ngOnInit() {
-    this.isAuthenticated$ = this.authService.isAuthenticated$();
     this.cartTotalItems$ = this.productService.getCartProducts().pipe(
       map((data) => {
         return data.length;
